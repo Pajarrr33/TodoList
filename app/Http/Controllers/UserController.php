@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function login(): Response
     {
-        return response()->view("User.login", ["title" => "Login"]);
+        return response()->view("user.login", ["title" => "Login"]);
     }
 
     public function doLogin(Request $request): Response|RedirectResponse
@@ -29,7 +29,7 @@ class UserController extends Controller
 
         // validate input
         if(empty($user) || empty($password)) {
-            return response()->view("User.login", [
+            return response()->view("user.login", [
                 "title" => "Login",
                 "error" => "User or password required"
             ]);
@@ -40,15 +40,17 @@ class UserController extends Controller
             return redirect("/");
         }
 
-        return response()->view("User.login", [
+        return response()->view("user.login", [
             "title" => "Login",
             "error" => "User or password not found"
         ]);
 
     }
 
-    public function doLogout()
+    public function doLogout(Request $request): RedirectResponse
     {
+        $request->session()->forget("user");
 
+        return redirect("/");
     }
 }

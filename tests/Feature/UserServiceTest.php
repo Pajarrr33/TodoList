@@ -17,6 +17,7 @@ class UserServiceTest extends TestCase
 
      $this->userService = $this->app->make(UserService::class);
    }
+
    
    public function testLoginSucces()
    {
